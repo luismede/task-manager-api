@@ -12,10 +12,6 @@ export class UpdateTaskController {
   @HttpCode(HttpStatus.OK)
   @Put(':id')
   public async handle(@Param() {id}: UpdateTaskParamDTO, @Body() data: UpdateTaskRequestDTO): Promise<UpdateTaskOutputDTO> {
-
-    
-    if (!id) throw new BadRequestException ('Ops! Informe qual o id da tarefa');
-
     return this.updateTaskService.execute({...data, id})
   }
 }

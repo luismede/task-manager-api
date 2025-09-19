@@ -12,6 +12,5 @@ export class CreateTaskController {
   @Post()
   public async handle(@Body() data: CreateTaskRequestDTO): Promise<CreateTaskOutputDTO> { 
     return await this.createTaskService.execute(data);
-
   }
 }
