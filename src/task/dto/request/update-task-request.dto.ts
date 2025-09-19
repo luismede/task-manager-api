@@ -1,4 +1,4 @@
-import {IsDate, isNumber, IsOptional, MinLength } from "class-validator"
+import { IsOptional, MinLength } from "class-validator"
 
 const messageMinLenght = 'da tarefa de ter no minimo 5 letras';
 export class UpdateTaskRequestDTO {
