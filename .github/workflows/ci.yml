@@ -45,8 +45,8 @@ jobs:
 
       - name: Preparar Prisma
         run: |
-          pnpm exec prisma generate
-          pnpm exec prisma migrate deploy
+          pnpm dlx prisma@6.16.1 generate
+          pnpm dlx prisma@6.16.1 migrate deploy
 
       - name: Verificar código com ESLint
         run: pnpm exec eslint "{src,apps,libs,test}/**/*.ts"
