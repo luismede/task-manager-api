@@ -1,0 +1,25 @@
+name: Deploy no Render
+
+# Executa o deploy quando houver um push na branch principal.
+on:
+  push:
+    branches: [main]
+
+# Permite resolver o commit mesmo quando o repositório é privado.
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    # Usa um runner Linux para executar a action de deploy.
+    runs-on: ubuntu-latest
+    steps:
+      # Envia o commit ao Render e aguarda o resultado do deploy.
+      - name: Acionar deploy no Render
+        uses: JorgeLNJunior/render-deploy@v1.5.0
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.sha }}
+          wait_deploy: true
