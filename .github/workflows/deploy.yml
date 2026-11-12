@@ -22,4 +22,4 @@ jobs:
           api_key: ${{ secrets.RENDER_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.sha }}
-          wait_deploy: true
+          wait_deploy: false
