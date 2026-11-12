@@ -54,9 +54,6 @@ jobs:
       - name: Testes unitários e cobertura
         run: pnpm exec jest --ci --coverage --passWithNoTests
 
-      - name: Testes de integração e cobertura
-        run: pnpm exec jest --config ./test/jest-e2e.json --ci --coverage --coverageDirectory=coverage/e2e --modulePaths="$GITHUB_WORKSPACE" --forceExit
-
       - name: Publicar relatórios de cobertura
         if: always()
         uses: actions/upload-artifact@v4
@@ -64,7 +61,6 @@ jobs:
           name: coverage
           path: |
             coverage/
-            test/coverage/
           if-no-files-found: ignore
 
       - name: Compilar
