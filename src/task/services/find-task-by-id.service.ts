@@ -1,28 +1,28 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "src/shared/database/services/prisma.service";
-import { FindTaskByIdOutputDTO } from "../dto/io/find-task-by-id.output";
-import { FindTaskByIdInputDTO } from "../dto/io/find-task-by-id-input.dto";
-import { RedisService } from "redis/services/redis.service";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'src/shared/database/services/prisma.service';
+import { FindTaskByIdOutputDTO } from '../dto/io/find-task-by-id.output';
+import { FindTaskByIdInputDTO } from '../dto/io/find-task-by-id-input.dto';
+import { RedisService } from 'redis/services/redis.service';
 
 @Injectable()
 export class FindTaskByIdService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly redisService: RedisService
-  ) {};
+    private readonly redisService: RedisService,
+  ) {}
 
-
-  public async execute({id}: FindTaskByIdInputDTO): Promise<FindTaskByIdOutputDTO> { 
-
+  public async execute({
+    id,
+  }: FindTaskByIdInputDTO): Promise<FindTaskByIdOutputDTO> {
     const default_TTL = 60 * 60 * 24;
     const cacheKey = `tasks:${id}`;
     const cachedTask = await this.redisService.get(cacheKey);
     if (cachedTask) {
       console.log('Returning cached task');
-      return JSON.parse(cachedTask);
+      return JSON.parse(cachedTask) as FindTaskByIdOutputDTO;
     }
 
-     const taskById = await this.prismaService.task.findFirst({
+    const taskById = await this.prismaService.task.findFirst({
       where: {
         id,
       },
@@ -34,19 +34,20 @@ export class FindTaskByIdService {
         finishedAt: true,
         statusId: true,
         status: {
-          select: { 
+          select: {
             id: true,
-            name: true
-          }
-        }
+            name: true,
+          },
+        },
       },
-    }); 
+    });
 
     if (!taskById) throw new NotFoundException('Tarefa não encontrada');
 
-    await this.redisService.set(cacheKey, JSON.stringify(taskById), { ttl: default_TTL})
- 
+    await this.redisService.set(cacheKey, JSON.stringify(taskById), {
+      ttl: default_TTL,
+    });
+
     return taskById;
-    
   }
 }

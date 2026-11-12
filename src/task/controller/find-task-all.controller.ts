@@ -1,5 +1,5 @@
-import { Controller, Get, HttpCode, HttpStatus } from "@nestjs/common";
-import { FindTaskAllService } from "../services";
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { FindTaskAllService } from '../services';
 
 @Controller()
 export class FindTaskAllController {
@@ -8,6 +8,6 @@ export class FindTaskAllController {
   @HttpCode(HttpStatus.OK)
   @Get()
   public async handle() {
-    return this.findTaskAllService.execute(); 
+    return this.findTaskAllService.execute();
   }
 }

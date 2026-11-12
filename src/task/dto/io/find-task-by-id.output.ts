@@ -1,4 +1,4 @@
-import { TaskStatus } from "@prisma/client";
+import { TaskStatus } from '@prisma/client';
 
 export class FindTaskByIdOutputDTO {
   id: number;
@@ -7,5 +7,5 @@ export class FindTaskByIdOutputDTO {
   createdAt: Date;
   finishedAt?: Date | null;
   statusId: number;
-  status: TaskStatus; 
+  status: TaskStatus;
 }

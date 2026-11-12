@@ -1,16 +1,18 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "../../shared/database/services/prisma.service"
-import { DeleteTaskInputDTO } from "../dto/io/delete-task-input.dto";
-import { DeleteTaskOutputDTO } from "../dto/io/delete-task-output.dto";
-import { RedisService } from "redis/services/redis.service";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../shared/database/services/prisma.service';
+import { DeleteTaskInputDTO } from '../dto/io/delete-task-input.dto';
+import { DeleteTaskOutputDTO } from '../dto/io/delete-task-output.dto';
+import { RedisService } from 'redis/services/redis.service';
 
 @Injectable()
 export class DeleteTaskService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly redisService: RedisService
+    private readonly redisService: RedisService,
   ) {}
-  public async execute({id}: DeleteTaskInputDTO): Promise<DeleteTaskOutputDTO> {
+  public async execute({
+    id,
+  }: DeleteTaskInputDTO): Promise<DeleteTaskOutputDTO> {
     const taskExists = await this.prismaService.task.findFirst({
       where: {
         id,
@@ -28,11 +30,11 @@ export class DeleteTaskService {
       },
     });
 
-    await this.redisService.delete('tasks:all')
+    await this.redisService.delete('tasks:all');
 
     return {
       id,
-      message: 'Tarefa deletada com sucesso!'
-    }
+      message: 'Tarefa deletada com sucesso!',
+    };
   }
 }

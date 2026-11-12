@@ -1,8 +1,8 @@
-import { Module } from "@nestjs/common";
-import { TaskModule } from './task/task.module'
-import { DatabaseModule } from "./shared/database/database.module";
-import { RouterModule } from "@nestjs/core";
-import { RedisModule } from "redis/redis.module";
+import { Module } from '@nestjs/common';
+import { TaskModule } from './task/task.module';
+import { DatabaseModule } from './shared/database/database.module';
+import { RouterModule } from '@nestjs/core';
+import { RedisModule } from 'redis/redis.module';
 
 @Module({
   imports: [
@@ -12,9 +12,9 @@ import { RedisModule } from "redis/redis.module";
     RouterModule.register([
       {
         path: 'task',
-        module: TaskModule
-      }
-    ])
+        module: TaskModule,
+      },
+    ]),
   ],
 })
 export class AppModule {}

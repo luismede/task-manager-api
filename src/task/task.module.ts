@@ -1,38 +1,34 @@
-import { Module } from "@nestjs/common";
-import { 
+import { Module } from '@nestjs/common';
+import {
   CreateTaskController,
   DeleteTaskController,
   FindTaskByIdController,
   FindTaskAllController,
-  UpdateTaskController
-} 
-from './controller';
+  UpdateTaskController,
+} from './controller';
 
-
-import { 
+import {
   CreateTaskService,
   DeleteTaskService,
   FindTaskByIdService,
   FindTaskAllService,
-  UpdateTaskService
-} 
-from "./services";
+  UpdateTaskService,
+} from './services';
 
 @Module({
-    controllers: [
-      CreateTaskController,
-      DeleteTaskController,
-      FindTaskByIdController,
-      FindTaskAllController,
-      UpdateTaskController
-    ],
-    providers: [
+  controllers: [
+    CreateTaskController,
+    DeleteTaskController,
+    FindTaskByIdController,
+    FindTaskAllController,
+    UpdateTaskController,
+  ],
+  providers: [
     CreateTaskService,
     DeleteTaskService,
     FindTaskByIdService,
     FindTaskAllService,
-    UpdateTaskService
-  ]
+    UpdateTaskService,
+  ],
 })
-
 export class TaskModule {}

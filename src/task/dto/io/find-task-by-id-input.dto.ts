@@ -1,3 +1,3 @@
 export class FindTaskByIdInputDTO {
-  id: number
+  id: number;
 }

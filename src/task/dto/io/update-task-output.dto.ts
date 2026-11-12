@@ -1,4 +1,4 @@
-import { TaskStatus } from "@prisma/client";
+import { TaskStatus } from '@prisma/client';
 
 export class UpdateTaskOutputDTO {
   id: number;
@@ -6,5 +6,5 @@ export class UpdateTaskOutputDTO {
   createdAt: Date;
   finishedAt?: Date | null;
   statusId: number;
-  status: TaskStatus
+  status: TaskStatus;
 }
